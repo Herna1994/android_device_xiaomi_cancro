@@ -33,3 +33,16 @@ ro.qualcomm.sensors.georv=true
 debug.qualcomm.sns.hal=w
 debug.qualcomm.sns.daemon=w
 debug.qualcomm.sns.libsensor1=w
+
+#display
+ro.device.screen_res=IPS Display 5 inches @ 1920px x 1080px (441 PPI)
+
+#camera
+ro.device.rear_cam=13Mpx
+ro.device.front_cam=2Mpx
+
+#CPU / MEM info
+ro.device.chipset=Qualcomm Snapdragon 800 8274AB
+ro.device.cpu=2.3 GHz Quad Core Krait 400
+ro.device.gpu=Adreno 330
+ro.product.ram =2GB
