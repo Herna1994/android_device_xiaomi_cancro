@@ -839,3 +839,8 @@ service modem_dump /system/bin/subsystem_ramdump 2 0
 on property:persist.radio.ramdump_sdcard=1
     write /sys/module/subsystem_restart/parameters/enable_ramdumps 1
     start modem_dump
+
+#temporary
+on property:sys.boot_completed=1
+    setprop pm.sleep_mode 1
+    setprop ro.ril.disable.power.collapse 0
