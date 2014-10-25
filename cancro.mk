@@ -48,17 +48,79 @@ PRODUCT_COPY_FILES += \
 
 # Audio
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rootdir/system/etc/audio_policy.conf:system/etc/audio_policy.conf \
-    $(LOCAL_PATH)/rootdir/system/etc/init.qcom.audio.sh:system/etc/init.qcom.audio.sh \
-    $(LOCAL_PATH)/rootdir/system/etc/listen_platform_info.xml:system/etc/listen_platform_info.xml \
-    $(LOCAL_PATH)/rootdir/system/etc/mixer_paths.xml:system/etc/mixer_paths.xml \
-    $(LOCAL_PATH)/rootdir/system/etc/acdbdata/MTP/MTP_Bluetooth_cal.acdb:system/etc/acdbdata/MTP/MTP_Bluetooth_cal.acdb \
-    $(LOCAL_PATH)/rootdir/system/etc/acdbdata/MTP/MTP_General_cal.acdb:system/etc/acdbdata/MTP/MTP_General_cal.acdb \
-    $(LOCAL_PATH)/rootdir/system/etc/acdbdata/MTP/MTP_Global_cal.acdb:system/etc/acdbdata/MTP/MTP_Global_cal.acdb \
-    $(LOCAL_PATH)/rootdir/system/etc/acdbdata/MTP/MTP_Handset_cal.acdb:system/etc/acdbdata/MTP/MTP_Handset_cal.acdb \
-    $(LOCAL_PATH)/rootdir/system/etc/acdbdata/MTP/MTP_Hdmi_cal.acdb:system/etc/acdbdata/MTP/MTP_Hdmi_cal.acdb \
-    $(LOCAL_PATH)/rootdir/system/etc/acdbdata/MTP/MTP_Headset_cal.acdb:system/etc/acdbdata/MTP/MTP_Headset_cal.acdb \
-    $(LOCAL_PATH)/rootdir/system/etc/acdbdata/MTP/MTP_Speaker_cal.acdb:system/etc/acdbdata/MTP/MTP_Speaker_cal.acdb
+    $(LOCAL_PATH)/audio/listen_platform_info.xml:system/etc/listen_platform_info.xml \
+    $(LOCAL_PATH)/audio/audio_policy.conf:system/etc/audio_policy.conf \
+    $(LOCAL_PATH)/audio/init.qcom.audio.sh:system/etc/init.qcom.audio.sh \
+    $(LOCAL_PATH)/audio/mixer_paths.xml:system/etc/mixer_paths.xml \
+    $(LOCAL_PATH)/audio/MTP/MTP_Bluetooth_cal.acdb:system/etc/acdbdata/MTP/MTP_Bluetooth_cal.acdb \
+    $(LOCAL_PATH)/audio/MTP/MTP_General_cal.acdb:system/etc/acdbdata/MTP/MTP_General_cal.acdb \
+    $(LOCAL_PATH)/audio/MTP/MTP_Global_cal.acdb:system/etc/acdbdata/MTP/MTP_Global_cal.acdb \
+    $(LOCAL_PATH)/audio/MTP/MTP_Handset_cal.acdb:system/etc/acdbdata/MTP/MTP_Handset_cal.acdb \
+    $(LOCAL_PATH)/audio/MTP/MTP_Hdmi_cal.acdb:system/etc/acdbdata/MTP/MTP_Hdmi_cal.acdb \
+    $(LOCAL_PATH)/audio/MTP/MTP_Headset_cal.acdb:system/etc/acdbdata/MTP/MTP_Headset_cal.acdb \
+    $(LOCAL_PATH)/audio/MTP/MTP_Speaker_cal.acdb:system/etc/acdbdata/MTP/MTP_Speaker_cal.acdb
+
+# Media profile
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/audio/media_codecs.xml:system/etc/media_codecs.xml \
+    $(LOCAL_PATH)/audio/media_profiles.xml:system/etc/media_profiles.xml
+
+#Audio & Media
+PRODUCT_PACKAGES += \
+    libc2dcolorconvert \
+    libdivxdrmdecrypt \
+    libdashplayer \
+    libOmxAacEnc \
+    libOmxAmrEnc \
+    libOmxCore \
+    libOmxEvrcEnc \
+    libOmxQcelp13Enc \
+    libOmxVdec \
+    libOmxVdecHevc \
+    libOmxVenc \
+    libstagefrighthw \
+    qcmediaplayer
+
+PRODUCT_BOOT_JARS += qcmediaplayer
+
+PRODUCT_PACKAGES += \
+    audiod \
+    audio.a2dp.default \
+    audio_policy.msm8974 \
+    audio.primary.msm8974 \
+    audio.r_submix.default \
+    audio.usb.default \
+    libaudio-resampler \
+    libqcompostprocbundle \
+    libqcomvisualizer \
+    libqcomvoiceprocessing \
+    tinymix
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    mm.enable.smoothstreaming=true \
+    mm.enable.qcom_parser=3183219 \
+    persist.usb.hvdcp.detect=true \
+    ro.qc.sdk.audio.fluencetype=fluence \
+    persist.audio.fluence.voicerec=false \
+    persist.audio.fluence.speaker=true \
+    persist.audio.fluence.voicecall=true \
+    af.resampler.quality=4 \
+    persist.audio.init_volume_index=1 \
+    audio.offload.buffer.size.kb=32 \
+    av.offload.enable=true \
+    audio.offload.gapless.enabled=false \
+    audio.offload.disable=1 \
+    audio.offload.pcm.enable=false \
+    use.voice.path.for.pcm.voip=true \
+    media.aac_51_output_enabled=true \
+    ro.qc.sdk.audio.ssr=false \
+    qcom.hw.aac.encoder=false \
+    tunnel.audio.encode=false \
+    audio.offload.pcm.enable=false \
+    ro.hdmi.enable=true \
+    ro.qc.sdk.sensors.gestures=true \
+    debug.sf.hw=1 \
+    debug.egl.hw=1
 
 # GPS
 PRODUCT_PACKAGES += \
@@ -128,11 +190,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/sec_config:system/etc/sec_config
 
-# Media profile
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/media_codecs.xml:system/etc/media_codecs.xml \
-    $(LOCAL_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml
-
 # NFC
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/nfc/libnfc-brcm.conf:system/etc/libnfc-brcm.conf \
@@ -174,63 +231,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/system/etc/usf_post_boot.sh:system/etc/usf_post_boot.sh \
     $(LOCAL_PATH)/rootdir/system/etc/xtwifi.conf:system/etc/xtwifi.conf \
     $(LOCAL_PATH)/rootdir/system/etc/modem/Diag.cfg:system/etc/modem/Diag.cfg
-
-#Audio & Media
-PRODUCT_PACKAGES += \
-    libc2dcolorconvert \
-    libdivxdrmdecrypt \
-    libdashplayer \
-    libOmxAacEnc \
-    libOmxAmrEnc \
-    libOmxCore \
-    libOmxEvrcEnc \
-    libOmxQcelp13Enc \
-    libOmxVdec \
-    libOmxVdecHevc \
-    libOmxVenc \
-    libstagefrighthw \
-    qcmediaplayer
-
-PRODUCT_BOOT_JARS += qcmediaplayer
-
-PRODUCT_PACKAGES += \
-    audiod \
-    audio.a2dp.default \
-    audio_policy.msm8974 \
-    audio.primary.msm8974 \
-    audio.r_submix.default \
-    audio.usb.default \
-    libaudio-resampler \
-    libqcompostprocbundle \
-    libqcomvisualizer \
-    libqcomvoiceprocessing \
-    tinymix
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    mm.enable.smoothstreaming=true \
-    mm.enable.qcom_parser=3183219 \
-    persist.usb.hvdcp.detect=true \
-    ro.qc.sdk.audio.fluencetype=fluence \
-    persist.audio.fluence.voicerec=false \
-    persist.audio.fluence.speaker=true \
-    persist.audio.fluence.voicecall=true \
-    af.resampler.quality=4 \
-    persist.audio.init_volume_index=1 \
-    audio.offload.buffer.size.kb=32 \
-    av.offload.enable=true \
-    audio.offload.gapless.enabled=false \
-    audio.offload.disable=1 \
-    audio.offload.pcm.enable=false \
-    use.voice.path.for.pcm.voip=true \
-    media.aac_51_output_enabled=true \
-    ro.qc.sdk.audio.ssr=false \
-    qcom.hw.aac.encoder=false \
-    tunnel.audio.encode=false \
-    audio.offload.pcm.enable=false \
-    ro.hdmi.enable=true \
-    ro.qc.sdk.sensors.gestures=true \
-    debug.sf.hw=1 \
-    debug.egl.hw=1
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
@@ -338,13 +338,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # System properties
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sf.lcd_density=400 \
+    ro.sf.lcd_density=420 \
     persist.hwc.mdpcomp.enable=true \
     debug.mdpcomp.logs=0 \
     debug.composition.type=dyn \
     dev.pm.dyn_samplingrate=1 \
     ril.subscription.types=RUIM \
-    ro.telephony.ril_class=QualcommSharedRIL \
     ro.opengles.version=196608 \
     persist.omh.enabled=true \
     persist.sys.ssr.restart_level=3 \
